@@ -12,7 +12,9 @@ pipeline {
             steps {
                 dir('bugtracker-backend'){
                     sh '''
-                    export GOCACHE=/tmp/go-build
+                    mkdir -p $WORKSPACE/.go-build $WORKSPACE/.go-mod
+                    export GOCACHE=$WORKSPACE/.go-build
+                    export GOMODCACHE=$WORKSPACE/.go-mod
                     go test -v ./...
                     '''
                 }
